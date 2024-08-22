@@ -1,6 +1,6 @@
 {
-  "name": "barba-starter-template",
-  "version": "1.0.0",
+  "name": "barba-starter-MyProject",
+  "version": "1.0.1",
   "description": "A simple starter template for setting up a ECMAScript 6 project with barba.js and webpack.",
   "main": "app.js",
   "scripts": {
