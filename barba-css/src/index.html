@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Barba.js with Barba CSS Plugin</title>
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-    <link href="assets/app.css" rel="stylesheet">
-  </head>
-  <body>
 
-    <header class="is-home" data-background="#5C85EE">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Barba.js with Barba CSS Plugin</title>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link href="assets/app.css" rel="stylesheet">
+</head>
+
+<body data-barba="wrapper">
+
+    <header class="is-home" 
+            data-barba="container" 
+            data-barba-namespace="home" 
+            data-background="#5C85EE">
       <div class="transition">
         <h2>Cover Screen</h2>
       </div>
@@ -20,6 +25,7 @@
       </div>
     </header>
 
-    <script src="assets/app.js"></script>
-  </body>
+  <script src="assets/app.js"></script>
+</body>
+
 </html>
