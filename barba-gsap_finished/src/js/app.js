@@ -56,6 +56,7 @@ barba.init({
             name: 'general-transition',
             once({ next }) {
                 resetActiveLink();
+                console.log('general');
                 gsap.from('header a', {
                     duration: 0.6,
                     yPercent: 100,
