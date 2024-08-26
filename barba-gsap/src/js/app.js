@@ -1,16 +1,35 @@
 import barba from '@barba/core';
+import barbaPrefetch from '@barba/prefetch';
 import gsap from 'gsap';
 import { revealProject, leaveToProject, leaveFromProject, animationEnter, animationLeave } from './animations';
+
+// tell Barba to use the prefetch plugin
+barba.use(barbaPrefetch);
 
 const resetActiveLink = () => gsap.set('a.is-active span', {
     xPercent: -100,
     transformOrigin: 'left'
 });
-// barba.request(barbaRputer, {
-//     router: myRouters
-// })
+
+barba.hooks.enter((data) => {
+    // console.log('enter');
+    // console.log({ data });
+    window.scrollTo(0, 0);
+});
+
+barba.hooks.after(() => {
+    // console.log('after');
+});
 
 barba.init({
+    views: [
+        {
+            namespace: 'architecture',
+            beforeEnter(data) {
+                console.log('beforeEnter architecture');
+            }
+        }
+    ],
     transitions: [
         {
             name: 'detail',
@@ -18,35 +37,48 @@ barba.init({
                 namespace:['detail']
             },
             once({ next }) {
-                // console.logo('detail Page');
+                console.logo('once detail Page');
                 revealProject(next.container)
             },
             leave: ({ current }) => leaveToProject(current.container),
             enter({ next }) {
-                revealProject  (next.container)
+                revealProject(next.container)
             }
         },
         {
-            
-            // sync: true,
             name: 'general-transition',
             once({ next }) {
                 resetActiveLink();
-                console.log('General...');
+                console.log('general>>> Once');
                 gsap.from('header a', {
                     duration: 0.6,
                     yPercent: 100,
                     stagger: 0.2,
                     ease: 'power1.out',
                     onComplete: () => animationEnter(next.container)
-                })
-                // animationEnter(next.container)
+                });
             },
             leave: ({ current }) => animationLeave(current.container),
             enter({ next }) {
+                console.log('general>>> Enter');
                 animationEnter(next.container)
             }
-        },
-
+        }, {
+            name: 'from-detail',
+            from: {
+                namespace: [ 'detail' ]
+                // route: ['detail-2', 'detail']
+            },
+            leave: ({ current }) => leaveFromProject(current.container),
+            enter({ next }) {
+                gsap.from('header a', {
+                    duration: 0.6,
+                    yPercent: 100,
+                    stagger: 0.2,
+                    ease: 'power1.out'
+                });
+                animationEnter(next.container);
+            }
+        }
     ]
 })

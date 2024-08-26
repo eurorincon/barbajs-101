@@ -1,7 +1,7 @@
 import barba from '@barba/core';
 import barbaRouter from '@barba/router';
 import gsap from 'gsap';
-import { revealProject, leaveToProject, leaveFromProject, animationEnter, animationLeave } from './animations';
+import { animationEnte2, revealProject, leaveToProject, leaveFromProject, animationEnter, animationLeave } from './animations';
 
 const myRoutes = [
     { name: 'home', path: '/index.html' },
@@ -56,7 +56,7 @@ barba.init({
             name: 'general-transition',
             once({ next }) {
                 resetActiveLink();
-                console.log('general');
+                console.log('general>>> Once');
                 gsap.from('header a', {
                     duration: 0.6,
                     yPercent: 100,
@@ -67,6 +67,7 @@ barba.init({
             },
             leave: ({ current }) => animationLeave(current.container),
             enter({ next }) {
+                console.log('general>>> Enter');
                 animationEnter(next.container);
             }
         }, {
